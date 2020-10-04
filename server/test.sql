@@ -22,6 +22,7 @@ create table comments(
 	comment_id serial primary key,
 	user_id integer not null references users,
 	athlete_id integer not null references athletes,
+	username varchar ( 100 ) not null,
 	body varchar (250) not null,
 	created_on varchar(250) not null
 );

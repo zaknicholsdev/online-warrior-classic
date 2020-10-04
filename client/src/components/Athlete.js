@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Like from './Like';
+import AthleteComments from './AthleteComments';
+import AddComment from './AddComment';
 
 const Athlete = () => {
     const { id } = useParams();
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [athlete, setAthlete] = useState({});
+    const [data, setComment] = useState({
+        comment: ''
+    });
+    const [myData, setMyData] = useState({
+        comment: ''
+    })
 
     useEffect(() => {
         fetch(`http://localhost:5000/athletes/${id}`, {
@@ -17,7 +25,7 @@ const Athlete = () => {
             .then(
                 (result) => {
                     console.log(result)
-                    setAthlete({...result});
+                    setAthlete({ ...result });
                     setIsLoaded(true);
                 },
                 (error) => {
@@ -27,26 +35,45 @@ const Athlete = () => {
             )
     }, [])
 
+    const handleChange = (e) => {
+        setComment({ ...data, [e.target.name]: e.target.value })
+    }
+
+    const handleSubmit = (event) => {
+        fetch(`http://localhost:5000/comments/${id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(result => setMyData({ ...result }))
+            .catch(err => console.error(err));
+        event.preventDefault();
+    };
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
         return <div>Loading...</div>;
     } else {
         return (
-                <div className="box" key={athlete.athlete.athlete_id}>
-                    <li>
-                        Name: {athlete.athlete.name}
-                    </li>
-                    <li>
-                        <img src={athlete.athlete.image_url}></img>
-                    </li>
-                    <li>
-                        Category: {athlete.athlete.category}
-                    </li>
-                    <Like like={athlete.likes.likes} id={athlete.athlete.athlete_id} hasVoted={!athlete.tOrF ? false : athlete.tOrF.vote}></Like>
-                </div>
+            <div className="box" key={athlete.athlete.athlete_id}>
+                <li>
+                    Name: {athlete.athlete.name}
+                </li>
+                <li>
+                    <img src={athlete.athlete.image_url}></img>
+                </li>
+                <li>
+                    Category: {athlete.athlete.category}
+                </li>
+                <Like like={athlete.likes.likes} id={athlete.athlete.athlete_id} hasVoted={!athlete.tOrF ? false : athlete.tOrF.vote}></Like>
+                <AddComment comment={data.comment} handleSubmit={handleSubmit} handleChange={handleChange} />
+                <AthleteComments comment={myData} athleteId={athlete.athlete.athlete_id} />
+            </div>
         );
-    }
+    };
 };
 
 export default Athlete;
