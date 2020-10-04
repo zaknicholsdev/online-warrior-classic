@@ -20,7 +20,7 @@ const Me = () => {
     console.log(data);
 
     return (
-        isLoaded ? <div className="text-center">
+        isLoaded && data.likedAthletes ? <div className="text-center">
             <div>Username: {data.user.username} </div>
             <div>User ID: {data.user.user_id}</div>
             {data.likedAthletes.map(athlete => (

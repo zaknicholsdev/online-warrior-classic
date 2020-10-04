@@ -21,7 +21,7 @@ router.get('/me', isAuth, wrapAsync(async (req, res) => {
     const { rows } = await db.query('select username, user_id from users where user_id = $1', [id]);
     const likedAthletes = await db.query('select athletes.athlete_id, athletes.name, athletes.image_url from votes left outer join athletes on (votes.athlete_id = athletes.athlete_id) where votes.vote = true and user_id = $1', [id]);
     if (rows.length <= 0) {
-        res.status(404).json({ msg: 'This user does not exist.' });
+        return res.status(404).json({ msg: 'This user does not exist.' });
     };
     res.json({
         user: rows[0],

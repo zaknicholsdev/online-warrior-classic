@@ -24,24 +24,6 @@ const isAuth = (req, res, next) => {
     });
 };
 
-// const sign = (payload) => {
-//     jwt.sign(
-//         payload,
-//         'shhh',
-//         { expiresIn: '5d' },
-//         (err, token) => {
-//             if (err) return res.status(401).json({ msg: 'You\'re not authenticated.' });
-//             res.cookie('auth-token', token, {
-//                 expires: new Date(Date.now() + 90000000),
-//                 httpOnly: false,
-//                 secure: false,
-//                 path: "/"
-//             }).json({ msg: 'You\'re logged in.' })
-//         }
-//     );
-// };
-
 module.exports = {
     isAuth
-    // sign
 };

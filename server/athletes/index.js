@@ -27,10 +27,10 @@ router.get('/:id', isAuth, wrapAsync(async (req, res) => {
 }));
 
 router.post('/', isAuth, wrapAsync(async (req, res) => {
+    const { id } = req.user;
     const { name, category, image_url } = req.body;
-    console.log(req.body);
     const athlete = await db.query('insert into athletes (name, category, image_url) values ($1, $2, $3) returning *', [name, category, image_url]);
-    const upvote = await db.query('insert into votes (user_id, athlete_id, vote) values ($1, $2, $3) returning *', [1, athlete.rows[0].athlete_id, true]);
+    const upvote = await db.query('insert into votes (user_id, athlete_id, vote) values ($1, $2, $3) returning *', [id, athlete.rows[0].athlete_id, true]);
     res.json(upvote.rows);
 }));
 
@@ -52,7 +52,7 @@ router.post('/:id/like', isAuth, wrapAsync(async (req, res) => {
             hasLiked: like.rows[0].vote,
             likes: otherSelect.rows[0].likes
         });
-    }
+    };
 }));
 
 module.exports = router;
