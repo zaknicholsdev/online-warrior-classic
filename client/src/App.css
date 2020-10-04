@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0;
 } */
+body {
+  margin: 0;
+}
+
 * {
   font-family: 'Roboto', sans-serif;
 }
@@ -19,7 +23,7 @@ ul {
   color: red;
 }
 
-.like {
+.likes {
   color: red;
 }
 
@@ -73,7 +77,7 @@ ul {
 }
 
 /* On screens that are 500px wide or less, go from four columns to two columns */
-@media screen and (max-width: 500px) {
+/* @media screen and (max-width: 500px) {
   .column {
     max-width: 100vw;
 
@@ -81,7 +85,7 @@ ul {
   .c {
     flex: 0 1 20%;
   }
-}
+} */
 
 /* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
 /* @media screen and (max-width: 600px) {
@@ -90,7 +94,7 @@ ul {
   }
 } */
 
-img {
+.athlete-main-img {
   height: 5rem;
   width: 5rem;
   border-radius: 10px;
@@ -115,4 +119,103 @@ img {
 .container {
   margin-left: 10vw;
   margin-right: 10vw;
+}
+
+.box {
+  position: relative;
+  width: 90vw;
+}
+
+.content-img {
+  max-height: 70vh;
+  width: 90vw;
+  border-bottom-right-radius: 20px;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 500px) {
+  .content-img {
+    width: 50vw;
+  }
+  .box {
+    width: 50vw;
+  }
+}
+
+.like {
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  background-color: rgb(255, 0, 55);
+  color: white;
+  position: absolute;
+  padding: 15px;
+  bottom: 4px;
+  right: 0px;
+}
+
+nav {
+  background-color: black;
+  overflow: hidden;
+  padding: 1em;
+}
+
+nav a {
+  color: white;
+}
+
+nav a:visited {
+  color: white;
+}
+
+nav .navWide {
+  display: none;
+  margin: 0 auto;
+}
+
+nav .navWide .wideDiv {
+  text-align: center;
+}
+
+nav .navWide .wideDiv a {
+  text-decoration: none;
+  display: inline-block;
+  /*Adjust padding to increase/decrease the space between links.*/
+  padding: 0 2em;
+}
+
+/*Navbar is set to default with the "hamburger" and links on the left
+side of the screen. To move to the right of the screen, simply
+change the three "float: Left;" references to read "float: right;".*/
+nav .navNarrow i {
+  float: left;
+  cursor: pointer;
+  color: white;
+}
+
+nav  {
+  padding: 1em;
+}
+
+nav .navNarrow .narrowLinks a {
+  text-decoration: none;
+  display: block;
+  float: left;
+  clear: left;
+  margin: .75em 0;}
+
+.hidden {
+  display: none;
+}
+
+
+/*Adjust breakpoint as desired to select when the "hamburger" menu is
+replaced by just the links.*/
+@media (min-width: 480px) {
+  nav .navWide {
+    display: block;
+  }
+
+  nav .navNarrow {
+    display: none;
+  }
 }

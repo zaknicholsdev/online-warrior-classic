@@ -2,7 +2,7 @@ import React from 'react';
 
 const AddComment = ({ comment, handleChange, handleSubmit }) => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="container" onSubmit={handleSubmit}>
             <label>
                 Comment:
                     <input type="text" value={comment} name="comment" onChange={handleChange} />

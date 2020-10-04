@@ -1,8 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 
-const Like = ({ like, id, hasVoted }) => {
-    const [myLike, setMyLike] = useState(like);
-    const [athlete, setAthlete] = useState([]);
+const Like = ({ id, hasVoted }) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [myBoolean, setMyBoolean] = useState(hasVoted);
@@ -16,7 +14,6 @@ const Like = ({ like, id, hasVoted }) => {
             .then(
                 (result) => {
                     console.log(result)
-                    setAthlete({ ...result });
                     setIsLoaded(true);
                 },
                 (error) => {
@@ -26,25 +23,22 @@ const Like = ({ like, id, hasVoted }) => {
             )
     }, []);
 
-    const handleClick = async () => {
-        await fetch(`http://localhost:5000/athletes/${id}/like`, {
+    const handleClick = () => {
+        fetch(`http://localhost:5000/athletes/${id}/like`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => res.json())
-            .then(
-                (result) => {
-                    setMyLike({ ...result })
-                    setMyBoolean(!myBoolean)
-                },
+            .then(() => {
+                setMyBoolean(!myBoolean)
+            },
                 (error) => {
                     console.error(error)
                 }
             )
-        // .catch(error => console.error(error))
     };
-    
+
     if (error) {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -52,7 +46,7 @@ const Like = ({ like, id, hasVoted }) => {
     } else {
         return (
             <Fragment>
-                <button onClick={handleClick} className={myBoolean ? 'like' : 'nothing'}>Like {myLike === like ? myLike : myLike.likes}</button>
+                <div onClick={handleClick} className={myBoolean ? 'like fas fa-heart' : 'like far fa-heart'}></div>
             </Fragment>
         )
     }

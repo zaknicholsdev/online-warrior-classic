@@ -36,12 +36,12 @@ const Athletes = () => {
                 {data.athletes ? data.athletes.map(athlete => (
                     <div className="column" key={athlete.athlete_id}>
                         <div className="r">
-                            <img className="c" style={{ backgroundImage: `url(${athlete.image_url})` }} />
+                            <img className="c athlete-main-img" style={{ backgroundImage: `url(${athlete.image_url})` }} />
                             <div className="c">
                                 {athlete.name}
                             </div>
                             <i className="far fa-thumbs-up">{athlete.likes}</i>
-                            <i className={athlete.liked_athletes > 0 ? 'like c fas fa-heart' : 'c far fa-heart'}></i>
+                            <i className={athlete.liked_athletes > 0 ? 'likes c fas fa-heart' : 'c far fa-heart'}></i>
                             {/* <div className="c">
                                 {athlete.category}
                             </div> */}
