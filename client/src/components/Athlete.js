@@ -14,7 +14,7 @@ const Athlete = () => {
     });
     const [myData, setMyData] = useState({
         comment: ''
-    })
+    });
 
     useEffect(() => {
         fetch(`http://localhost:5000/athletes/${id}`, {
@@ -60,8 +60,8 @@ const Athlete = () => {
         return (
             <div key={athlete.athlete.athlete_id}>
                 <div className="box">
-                        <img src={athlete.athlete.image_url} className="content-img"></img>
-                        <Like className="like" id={athlete.athlete.athlete_id} hasVoted={!athlete.tOrF ? false : athlete.tOrF.vote}></Like>
+                    <img src={athlete.athlete.image_url} className="content-img"></img>
+                    <Like className="like" id={athlete.athlete.athlete_id} hasVoted={!athlete.tOrF ? false : athlete.tOrF.vote}></Like>
                 </div>
                 <div className="container">
                     <div><strong>{athlete.athlete.name}</strong></div>

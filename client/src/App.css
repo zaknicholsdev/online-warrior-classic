@@ -123,12 +123,12 @@ ul {
 
 .box {
   position: relative;
-  width: 90vw;
+  width: 80vw;
 }
 
 .content-img {
-  max-height: 70vh;
-  width: 90vw;
+  height: 70vh;
+  width: 80vw;
   border-bottom-right-radius: 20px;
   object-fit: cover;
 }
@@ -142,15 +142,38 @@ ul {
   }
 }
 
+@media screen and (min-width: 800px) {
+  .content-img {
+    width: 40vw;
+  }
+  .box {
+    width: 40vw;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .content-img {
+    width: 30vw;
+  }
+  .box {
+    width: 30vw;
+  }
+}
+
+.heart {
+  font-size: 1.5em;
+}
+
 .like {
   border-bottom-right-radius: 20px;
   border-top-left-radius: 20px;
-  background-color: rgb(255, 0, 55);
+  background-color: red;
   color: white;
   position: absolute;
-  padding: 15px;
+  padding: .75em;
   bottom: 4px;
   right: 0px;
+  cursor: pointer;
 }
 
 nav {
@@ -217,5 +240,92 @@ replaced by just the links.*/
 
   nav .navNarrow {
     display: none;
+  }
+}
+
+.created-sm {
+  font-size: .75em;
+  margin-left: .5em;
+  color: gray;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0 auto;
+  padding: 0;
+  width: 80%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
   }
 }

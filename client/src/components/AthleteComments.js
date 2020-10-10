@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const AthleteComments = ({ athleteId, comment }) => {
     const [comments, setComments] = useState([]);
-    console.log('rendering', comment)
 
     useEffect(() => {
         fetch(`http://localhost:5000/comments/${athleteId}`, {
@@ -17,12 +16,14 @@ const AthleteComments = ({ athleteId, comment }) => {
     }, [comment]);
 
     return (
-        <div className="container">
+        <div>
             <div>{comments.length >= 0 ? comments.map(comment => (
                 <div className="comment-column space" key={comment.comment_id}>
-                    <div><strong>{comment.username}</strong></div>
+                    <div>
+                        <strong>{comment.username}</strong>
+                        <span className="created-sm"><i>{comment.created_on}</i></span>
+                    </div>
                     <p className="no-p-margin">{comment.body}</p>
-                    <div><i>{comment.created_on}</i></div>
                 </div>
             )) : <div>There are no comments.</div>}</div>
         </div>

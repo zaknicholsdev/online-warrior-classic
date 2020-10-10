@@ -46,10 +46,10 @@ const Like = ({ id, hasVoted }) => {
     } else {
         return (
             <Fragment>
-                <div onClick={handleClick} className={myBoolean ? 'like fas fa-heart' : 'like far fa-heart'}></div>
+                <div onClick={handleClick} className={myBoolean ? 'like fas heart fa-heart' : 'like heart far fa-heart'}></div>
             </Fragment>
         )
-    }
+    };
 };
 
 export default Like;
