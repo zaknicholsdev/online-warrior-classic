@@ -103,6 +103,8 @@ ul {
 
 .no-p-margin {
   margin: 0;
+  word-break: break-word;
+  margin-right: 30vw;
 }
 
 .space {
@@ -117,8 +119,8 @@ ul {
 }
 
 .container {
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin-left: 30vw;
+  margin-right: 30vw;
 }
 
 .box {
@@ -135,30 +137,37 @@ ul {
 
 @media screen and (min-width: 500px) {
   .content-img {
-    width: 50vw;
-  }
-  .box {
-    width: 50vw;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .content-img {
-    width: 40vw;
-  }
-  .box {
-    width: 40vw;
-  }
-}
-
-@media screen and (min-width: 1000px) {
-  .content-img {
+    margin-top: 20px;
+    height: 70vh;
     width: 30vw;
+    border-radius: 20px;
   }
   .box {
     width: 30vw;
+    margin: auto;
   }
 }
+
+/* @media screen and (min-width: 800px) {
+  .content-img {
+    width: 10vw;
+  }
+  .box {
+    width: 70vw;
+    margin: auto;
+  }
+} */
+
+/* @media screen and (min-width: 800px) {
+  .content-img {
+    height: 50vh;
+    width: 10vw;
+  }
+  .box {
+    width: 10vw;
+    margin: auto;
+  }
+} */
 
 .heart {
   font-size: 1.5em;
