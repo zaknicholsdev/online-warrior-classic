@@ -71,14 +71,10 @@ router.post('/login', wrapAsync(async (req, res) => {
     if (req.headers.cookie) { return res.json({ msg: 'You\'re already logged in.' }) };
     const { username, password } = req.body;
     const user = await db.query('select * from users where username = $1', [username]);
-    console.log(user.rows[0])
+    console.log(user.rows[0]);
 
-    if (
-        !password ||
-        !username ||
-        user.rows[0].username !== username
-    ) {
-        return res.status(401).json({ msg: 'Invalid credentials' });
+    if (!user.rows[0]) {
+        return res.status(404).json({ msg: 'User not found.' });
     };
 
     const compare = await comparePasswords(password, user.rows[0].password);
@@ -104,7 +100,7 @@ router.post('/login', wrapAsync(async (req, res) => {
                 httpOnly: false,
                 secure: false,
                 path: "/"
-            }).json({ msg: 'You\'re logged in.' })
+            }).json({ success: 'You\'re logged in.' })
         }
     );
 }));
@@ -122,8 +118,6 @@ router.put('/edit-account', isAuth, wrapAsync(async (req, res) => {
 
 // Delete own account.
 router.delete('/me', isAuth, wrapAsync(async (req, res) => {
-    const { id } = req.user;
-
     if (user.rows.length <= 0) {
         throw new Error('This user doesn\'t exist.');
     };

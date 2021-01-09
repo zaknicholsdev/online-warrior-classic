@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const Logout = () => {
+const Logout = ({setIsLoggedIn}) => {
+    let history = useHistory();
     const handleClick = (event) => {
         event.preventDefault();
         fetch('http://localhost:5000/users/logout', {
@@ -8,16 +10,17 @@ const Logout = () => {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         })
-            .then(response => response.json())
-            .then(console.log('logged out.'))
+            .then(() => {
+                setIsLoggedIn(false);
+                history.replace('/login')
+            })
             .catch(err => console.error(err));
     };
 
     return (
-        <div className="text-center container">
-            <h1>Logout</h1>
-            <button type="button" className="btn btn-primary" onClick={handleClick}>Logout</button>
-        </div>
+        <Fragment>
+            <a href="/" style={{ color: 'white' }} onClick={handleClick}>Logout</a>
+        </Fragment>
     )
 };
 

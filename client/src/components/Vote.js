@@ -27,7 +27,7 @@ const Vote = ({ vote, id }) => {
             <button onClick={handleClick} className={myVote.update ? 'like' : null}>Like {myVote === vote ? myVote : myVote.likes}</button>
             <button onClick={handleClick} className={myVote.update ? 'dislike': null}>Dislike {myVote === vote ? myVote : myVote.dislikes}</button>
         </Fragment>
-    )
+    );
 };
 
 export default Vote;

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Athletes = () => {
@@ -29,6 +29,10 @@ const Athletes = () => {
         return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
         return <div>Loading...</div>;
+    } else if (data?.msg === 'No token. Authorization denied') {
+        return (
+            <div>You're not logged in.</div>
+        )
     } else {
         return (
             // <div className="row">

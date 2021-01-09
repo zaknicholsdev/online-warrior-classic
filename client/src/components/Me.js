@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const Me = () => {
     const [data, setData] = useState([]);
@@ -26,7 +25,7 @@ const Me = () => {
             {data.likedAthletes.map(athlete => (
                 <div key={athlete.athlete_id}>
                     <div>Name: {athlete.name}</div>
-                    <img className='small-img' src={athlete.image_url}></img>
+                    <img alt='athlete' className='small-img' src={athlete.image_url}></img>
                 </div>
             ))}
         </div> : <div>You must not be logged in.</div>

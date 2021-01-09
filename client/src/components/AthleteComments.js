@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const AthleteComments = ({ athleteId, comment }) => {
     const [comments, setComments] = useState([]);

@@ -18,17 +18,41 @@ import {
 } from "react-router-dom";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/users/me', {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result)
+        if (result.msg) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+        }
+      })
+  }, [])
+
   return (
     <HashRouter>
-      <Navbar />
-      <Switch>
-        <Route exact path="/athletes" component={Athletes} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
-        <Route exact path="/athlete/:id" component={Athlete} />
-        <Route exact path="/me" component={Me} />
-      </Switch>
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {isLoggedIn === true ?
+        <Switch>
+          <Route exact path="/athletes" component={Athletes} />
+          <Route exact path="/register" render={() => <Register setIsLoggedIn={setIsLoggedIn} />} />
+          <Route exact path="/login" render={() => <Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route exact path="/logout" component={Logout} />
+          <Route exact path="/athlete/:id" component={Athlete} />
+          <Route exact path="/me" component={Me} />
+        </Switch> :
+        <Switch>
+          <Route exact path="/register" render={() => <Register setIsLoggedIn={setIsLoggedIn} />} />
+          <Route exact path="/login" render={() => <Login setIsLoggedIn={setIsLoggedIn} />} />
+        </Switch>
+      }
     </HashRouter>
   );
 };

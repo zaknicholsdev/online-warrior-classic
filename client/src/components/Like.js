@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 const Like = ({ id, hasVoted }) => {
     const [error, setError] = useState(null);

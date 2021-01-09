@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({ setIsLoggedIn }) => {
+    let history = useHistory();
     const [data, setData] = useState({
         username: '',
         password: ''
@@ -16,17 +18,22 @@ const Register = () => {
             body: JSON.stringify(data)
         })
             .then(response => response.json())
-            .then(result => setError(result))
+            .then(result => {
+                if (result.msg === 'You\'re logged in.') {
+                    setIsLoggedIn(true);
+                }
+                history.replace('/athletes');
+            })
             .catch(err => console.error(err));
         event.preventDefault();
     };
 
     const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value })
+        setData({ ...data, [e.target.name]: e.target.value });
     };
 
     return (
-        <div className="text-center">
+        <div className="text-center container login-form">
             <h1>Register</h1>
             <div className="error">{error.msg}</div>
             <form onSubmit={handleSubmit}>
@@ -39,7 +46,7 @@ const Register = () => {
                 <button type="submit" className="btn btn-primary">Register</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default Register;

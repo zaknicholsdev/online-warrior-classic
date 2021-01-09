@@ -123,6 +123,12 @@ ul {
   margin-right: 30vw;
 }
 
+.login-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
 .box {
   position: relative;
   width: 80vw;
@@ -337,4 +343,17 @@ table th {
   table td:last-child {
     border-bottom: 0;
   }
+}
+
+input, textarea, select, button {
+  width : 150px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
 }

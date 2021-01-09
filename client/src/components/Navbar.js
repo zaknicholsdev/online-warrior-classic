@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import Logout from './Logout';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
     const narrowLinks = useRef(null);
 
     const handleToggle = () => {
@@ -14,8 +15,10 @@ const Navbar = () => {
                 <div className="navWide">
                     <div className="wideDiv">
                         <Link to="/">Home</Link>
-                        <Link to="athletes">Athletes</Link>
-                        <Link to="/login">Login</Link>
+                        <Link to="/athletes">Athletes</Link>
+                        {!isLoggedIn ? <Link to="/login">Login</Link> : null}
+                        {!isLoggedIn ? <Link to="/register">Register</Link> : null}
+                        {isLoggedIn  ? <Logout setIsLoggedIn={setIsLoggedIn} /> : null}
                     </div>
                 </div>
                 <div className="navNarrow" onClick={handleToggle}>
@@ -24,6 +27,8 @@ const Navbar = () => {
                         <Link to="/">Home</Link>
                         <Link to="/athletes">Athletes</Link>
                         <Link to="/login">Login</Link>
+                        <Link to="/register">Register</Link>
+                        <Logout setIsLoggedIn={setIsLoggedIn} />
                     </div>
                 </div>
             </nav>

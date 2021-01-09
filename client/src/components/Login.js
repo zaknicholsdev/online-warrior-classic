@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
+    let history = useHistory();
+
     const [data, setData] = useState({
         username: '',
         password: ''
@@ -17,7 +20,14 @@ const Login = () => {
             body: JSON.stringify(data)
         })
             .then(response => response.json())
-            .then(result => setError(result))
+            .then(result => {
+                if (result.success) {
+                    setIsLoggedIn(true);
+                    history.replace('/athletes');
+                } else {
+                    setError(result);
+                }
+            })
             .catch(err => console.error(err));
     };
 
@@ -26,7 +36,7 @@ const Login = () => {
     };
 
     return (
-        <div className="text-center container">
+        <div className="text-center container login-form">
             <h1>Login</h1>
             <div className="error">{error.msg}</div>
             <form>
