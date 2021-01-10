@@ -4,19 +4,7 @@ const { wrapAsync } = require('../errors/index');
 const db = require('../db/index');
 const { isAuth, signPayload } = require('../jwt/index');
 const { hashPassword, comparePasswords } = require('../bcrypt/index');
-
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './uploads')
-    },
-    filename: function (req, file, callback) {
-        callback(null, file.originalname); // modified here  or user file.mimetype
-    }
-})
-
-const upload = multer({ storage })
+const { upload } = require('../multer/index');
 
 // Get all users.
 router.get('/', wrapAsync(async (req, res) => {
