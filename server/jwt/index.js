@@ -24,6 +24,11 @@ const isAuth = (req, res, next) => {
     });
 };
 
+const signPayload = (payload, secret, expiration, callback) => {
+    jwt.sign(payload, secret, expiration, callback);
+};
+
 module.exports = {
-    isAuth
+    isAuth,
+    signPayload
 };

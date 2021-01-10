@@ -2,9 +2,8 @@ const { Router } = require('express');
 const router = new Router();
 const { wrapAsync } = require('../errors/index');
 const db = require('../db/index');
-const { isAuth } = require('../jwt/index');
+const { isAuth, signPayload } = require('../jwt/index');
 const { hashPassword, comparePasswords } = require('../bcrypt/index');
-const jwt = require('jsonwebtoken');
 
 // Get all users.
 router.get('/', wrapAsync(async (req, res) => {
@@ -50,7 +49,7 @@ router.post('/register', wrapAsync(async (req, res) => {
         }
     };
 
-    jwt.sign(
+    signPayload(
         payload,
         'shhh',
         { expiresIn: '5d' },
@@ -89,7 +88,7 @@ router.post('/login', wrapAsync(async (req, res) => {
         }
     };
 
-    jwt.sign(
+    signPayload(
         payload,
         'shhh',
         { expiresIn: '5d' },

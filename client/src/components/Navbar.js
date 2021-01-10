@@ -15,10 +15,10 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
                 <div className="navWide">
                     <div className="wideDiv">
                         <Link to="/">Home</Link>
-                        <Link to="/athletes">Athletes</Link>
-                        {!isLoggedIn ? <Link to="/login">Login</Link> : null}
-                        {!isLoggedIn ? <Link to="/register">Register</Link> : null}
-                        {isLoggedIn  ? <Logout setIsLoggedIn={setIsLoggedIn} /> : null}
+                        {isLoggedIn && <Link to="/athletes">Athletes</Link>}
+                        {!isLoggedIn && <Link to="/login">Login</Link>}
+                        {!isLoggedIn && <Link to="/register">Register</Link>}
+                        {isLoggedIn  && <Logout setIsLoggedIn={setIsLoggedIn} />}
                     </div>
                 </div>
                 <div className="navNarrow" onClick={handleToggle}>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import Home from './components/Home';
 import Athletes from './components/Athletes';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -11,10 +12,7 @@ import Navbar from './components/Navbar';
 import {
   HashRouter,
   Switch,
-  Route,
-  NavLink,
-  Redirect,
-  Link
+  Route
 } from "react-router-dom";
 
 const App = () => {
@@ -27,20 +25,20 @@ const App = () => {
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result)
         if (result.msg) {
           setIsLoggedIn(false);
         } else {
           setIsLoggedIn(true);
-        }
-      })
-  }, [])
+        };
+      });
+  }, []);
 
   return (
     <HashRouter>
       <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       {isLoggedIn === true ?
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/athletes" component={Athletes} />
           <Route exact path="/register" render={() => <Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route exact path="/login" render={() => <Login setIsLoggedIn={setIsLoggedIn} />} />

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const Logout = ({setIsLoggedIn}) => {
+const Logout = ({ setIsLoggedIn }) => {
     let history = useHistory();
     const handleClick = (event) => {
         event.preventDefault();

@@ -8,7 +8,7 @@ const Register = ({ setIsLoggedIn }) => {
         password: ''
     });
 
-    const [error, setError] = useState([])
+    const [error, setError] = useState('')
 
     const handleSubmit = (event) => {
         fetch('http://localhost:5000/users/register', {
@@ -19,10 +19,14 @@ const Register = ({ setIsLoggedIn }) => {
         })
             .then(response => response.json())
             .then(result => {
+                console.log(result)
                 if (result.msg === 'You\'re logged in.') {
                     setIsLoggedIn(true);
-                }
-                history.replace('/athletes');
+                    history.replace('/athletes');
+                };
+                if (result.msg === 'This username has already been taken.') {
+                    setError(result.msg);
+                };
             })
             .catch(err => console.error(err));
         event.preventDefault();
@@ -35,7 +39,7 @@ const Register = ({ setIsLoggedIn }) => {
     return (
         <div className="text-center container login-form">
             <h1>Register</h1>
-            <div className="error">{error.msg}</div>
+            {error && <div className="error">{error}</div>}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <input type="text" className="form-control" onChange={handleChange} value={data.username} name="username" placeholder="Username" />
