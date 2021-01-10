@@ -33,7 +33,7 @@ const Athlete = () => {
                     setError(error);
                 }
             )
-    }, [])
+    }, [id]);
 
     const handleChange = (e) => {
         setComment({ ...data, [e.target.name]: e.target.value })
@@ -60,7 +60,7 @@ const Athlete = () => {
         return (
             <div key={athlete.athlete.athlete_id}>
                 <div className="box">
-                    <img src={athlete.athlete.image_url} className="content-img"></img>
+                    <img src={athlete.athlete.image_url} alt="athlete" className="content-img"></img>
                     <Like id={athlete.athlete.athlete_id} hasVoted={!athlete.tOrF ? false : athlete.tOrF.vote}></Like>
                 </div>
                 <div className="container">

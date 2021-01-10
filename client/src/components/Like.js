@@ -21,7 +21,7 @@ const Like = ({ id, hasVoted }) => {
                     setError(error);
                 }
             )
-    }, []);
+    }, [id]);
 
     const handleClick = () => {
         fetch(`http://localhost:5000/athletes/${id}/like`, {

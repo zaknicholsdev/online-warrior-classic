@@ -63,9 +63,7 @@ ul {
   /* justify-self: center; */
 }
 
-.c {
-  flex: 0 1 20%;
-}
+z
 
 /* Create four equal columns */
 .column {
@@ -98,7 +96,7 @@ ul {
   height: 5rem;
   width: 5rem;
   border-radius: 10px;
-  background-size: cover;
+  object-fit: cover;
 }
 
 .no-p-margin {

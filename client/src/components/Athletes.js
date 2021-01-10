@@ -69,8 +69,9 @@ const Athletes = () => {
                 <tbody>
                     {data.athletes ? data.athletes.map(athlete => (
                         <tr key={athlete.athlete_id}>
-                            <td data-label="Image" >
-                                <img className="c athlete-main-img" style={{ backgroundImage: `url(${athlete.image_url})` }} />
+                            <td data-label="Image">
+                                {/* <img className="c athlete-main-img" style={{ backgroundImage: `url(${athlete.image_url})`}} /> */}
+                                <img className="c athlete-main-img" alt="athlete" src={athlete.image_url} />
                             </td>
                             <td data-label="Name">{athlete.name}</td>
                             <td data-label="Total Likes">{athlete.likes}</td>
