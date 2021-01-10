@@ -13,7 +13,7 @@ const AthleteComments = ({ athleteId, comment }) => {
                 setComments([...result]);
             })
             .catch(err => console.error(err))
-    }, [comment]);
+    }, [comment, athleteId]);
 
     return (
         <div>

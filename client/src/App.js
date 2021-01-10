@@ -25,11 +25,12 @@ const App = () => {
     })
       .then(response => response.json())
       .then(result => {
-        if (result.msg === 'No token. Authorization denied.') {
+        console.warn(result.msg);
+        if (result.msg !== 'You\re logged in') {
           setIsLoggedIn(false);
         } else {
           setIsLoggedIn(true);
-        };
+        }
       });
   }, []);
 
