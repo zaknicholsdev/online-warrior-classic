@@ -46,7 +46,7 @@ const Like = ({ id, hasVoted }) => {
     } else {
         return (
             <Fragment>
-                <div onClick={handleClick} className={myBoolean ? 'like fas heart fa-heart' : 'like heart far fa-heart'}></div>
+                <div onMouseDown={handleClick} className={myBoolean ? 'like fas heart fa-heart' : 'like heart far fa-heart'}></div>
             </Fragment>
         )
     };

@@ -25,7 +25,7 @@ const App = () => {
     })
       .then(response => response.json())
       .then(result => {
-        if (result.msg) {
+        if (result.msg === 'No token. Authorization denied.') {
           setIsLoggedIn(false);
         } else {
           setIsLoggedIn(true);
@@ -47,6 +47,7 @@ const App = () => {
           <Route exact path="/me" component={Me} />
         </Switch> :
         <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/register" render={() => <Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route exact path="/login" render={() => <Login setIsLoggedIn={setIsLoggedIn} />} />
         </Switch>

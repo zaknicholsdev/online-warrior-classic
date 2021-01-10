@@ -8,24 +8,19 @@ const Vote = ({ vote, id }) => {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({vote: false})
+            body: JSON.stringify({ vote: false })
         })
             .then(res => res.json())
-            .then(
-                (result) => {
-                    setMyVote({...result})
-                },
-                (error) => {
-                    console.error(error)
-                }
-            )
-        // .catch(error => console.error(error))
+            .then(result => {
+                setMyVote({ ...result })
+            })
+            .catch(error => console.error(error))
     };
 
     return (
         <Fragment>
             <button onClick={handleClick} className={myVote.update ? 'like' : null}>Like {myVote === vote ? myVote : myVote.likes}</button>
-            <button onClick={handleClick} className={myVote.update ? 'dislike': null}>Dislike {myVote === vote ? myVote : myVote.dislikes}</button>
+            <button onClick={handleClick} className={myVote.update ? 'dislike' : null}>Dislike {myVote === vote ? myVote : myVote.dislikes}</button>
         </Fragment>
     );
 };

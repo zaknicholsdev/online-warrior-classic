@@ -176,19 +176,15 @@ ul {
 } */
 
 .heart {
-  font-size: 1.5em;
+  margin-top: 1em;
+  text-align: center;
+  font-size: 2em;
+  color: red;
+  transition: all .08s ease-in-out;
 }
 
-.like {
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 20px;
-  background-color: red;
-  color: white;
-  position: absolute;
-  padding: .75em;
-  bottom: 4px;
-  right: 0px;
-  cursor: pointer;
+.heart:active {
+  transform: scale(1.5);
 }
 
 nav {
