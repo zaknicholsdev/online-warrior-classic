@@ -5,6 +5,19 @@ const db = require('../db/index');
 const { isAuth, signPayload } = require('../jwt/index');
 const { hashPassword, comparePasswords } = require('../bcrypt/index');
 
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './uploads')
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname); // modified here  or user file.mimetype
+    }
+})
+
+const upload = multer({ storage })
+
 // Get all users.
 router.get('/', wrapAsync(async (req, res) => {
     const { rows } = await db.query('select * from users');
@@ -12,6 +25,11 @@ router.get('/', wrapAsync(async (req, res) => {
         res.status(404).json({ msg: 'There are no users.' })
     };
     res.json(rows);
+}));
+
+router.post('/upload', upload.single('myImage'), wrapAsync(async (req, res) => {
+    console.log(req.file);
+    res.json({ file: req.file });
 }));
 
 // Get own account.
