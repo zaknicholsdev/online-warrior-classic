@@ -15,12 +15,6 @@ router.get('/', wrapAsync(async (req, res) => {
     res.json(rows);
 }));
 
-router.get('/:id', isAuth, wrapAsync(async (req, res) => {
-    const { id } = req.params;
-    const { rows } = await db.query('select * from users where user_id = $1', [id]);
-    res.json(rows);
-}));
-
 router.post('/upload', upload.single('myImage'), wrapAsync(async (req, res) => {
     console.log(req.file);
     res.json({ file: req.file });
@@ -39,6 +33,13 @@ router.get('/me', isAuth, wrapAsync(async (req, res) => {
         user: rows[0],
         likedAthletes: likedAthletes.rows
     });
+}));
+
+// Get another user account.
+router.get('/:id', isAuth, wrapAsync(async (req, res) => {
+    const { id } = req.params;
+    const { rows } = await db.query('select * from users where user_id = $1', [id]);
+    res.json(rows);
 }));
 
 // Create account.

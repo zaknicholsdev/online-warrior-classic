@@ -25,7 +25,6 @@ const App = () => {
     })
       .then(response => response.json())
       .then(result => {
-        console.warn(result.msg);
         if (result.msg !== 'You\re logged in') {
           setIsLoggedIn(false);
         } else {
